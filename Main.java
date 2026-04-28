@@ -6,6 +6,7 @@ import java.util.*;
 public class Main {
 
     public static int howManyUnderScores = 0;
+    public static String answer = "";
     public static void main(String[] args) {
 
         ArrayList<String> guesses = new ArrayList<>();
@@ -23,7 +24,7 @@ public class Main {
         words.add("TRIGONOMETRIC");
         Random r = new Random();
         System.out.println(r.nextInt(words.size()));
-        String answer = words.get(r.nextInt(words.size()));
+        answer = words.get(r.nextInt(words.size()));
         howManyUnderScores = answer.length();
         DrawTheGuy coolGuy = new DrawTheGuy();
         System.out.println(answer);
@@ -37,7 +38,7 @@ public class Main {
                     System.out.print(answer.charAt(j));
                 }else{
                     System.out.print("_");
-                    howManyUnderScores++;
+                   // howManyUnderScores++;
                 }
             }
             if(guess.length() > 1){
