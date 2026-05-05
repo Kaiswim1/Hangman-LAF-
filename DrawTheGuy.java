@@ -9,7 +9,8 @@ public class DrawTheGuy implements KeyListener {
     private JPanel panel;
     private String letters = "";
     private String revealed = ""; //This will start with only underscores and ass we guess correctly we replace them.
-   // private BufferedImage thing = ImageIO.read("file path");
+    private int triesLeft = 6;
+    // private BufferedImage thing = ImageIO.read("file path");
 
     //Here we are going to make a constructor to create the items
     public DrawTheGuy(){
@@ -19,11 +20,12 @@ public class DrawTheGuy implements KeyListener {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                g.drawLine(10, 10, 100, 100);
-                g.drawOval(100, 100, 50, 50);
+                g.drawLine(300, 150, 300, 260);
+                //g.drawOval(100, 100, 50, 50);
                 //drawUnderScores(g);
                 g.setFont(new Font("Arial", Font.PLAIN, 32));
                 g.drawString(revealed, 100, 290);
+                g.drawString(letters, 100, 50);
                 try {
                     Thread.sleep(16);
                 } catch (InterruptedException e) {
@@ -65,16 +67,26 @@ public class DrawTheGuy implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        letters+=e.getKeyChar();
-        System.out.println(letters);
+        if(!letters.contains(String.valueOf(e.getKeyChar())) && !Main.answer.toLowerCase().contains(String.valueOf(e.getKeyChar()))){
+            letters+=e.getKeyChar();
+        }else{
+            System.out.println("You already did that letter");
+        }
+
+        System.out.println(letters); //These are all the letters we have typed
         System.out.println(Main.answer);
+        boolean isIn = false;
         for (int i = 0; i < Main.answer.length(); i++) {
             if(Main.answer.toLowerCase().charAt(i) == e.getKeyChar()){
                 System.out.println("the letter we just typed is found in answer");
                 System.out.println("The letter has been found at index: "+i);
                 revealed = replace(revealed, i, e.getKeyChar());
                 System.out.println(revealed);
+                isIn = true;
             }
+        }
+        if(!isIn){
+            System.out.println("That letter is not in the word");
         }
     }
 
